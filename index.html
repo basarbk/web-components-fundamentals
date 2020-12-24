@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Components</title>
+    <style>
+      .btn {
+        background-color: #0070f3;
+        color: white;
+        border: none;
+        border-radius: 7px;
+        padding: 0 2rem;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        box-shadow: 0 4px 14px 0 rgba(0, 118, 255, 0.39);
+      }
+      .btn:hover {
+        background-color: #1d80f0;
+      }
+      .btn:disabled {
+        background-color: #6aa8f0;
+      }
+      .fading {
+        animation: fading 0.5s infinite;
+      }
+
+      @keyframes fading {
+        0% {
+          color: #6aa8f0;
+        }
+        50% {
+          color: white;
+        }
+        100% {
+          color: #6aa8f0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button id="classic-button" class="btn" onclick="longAction()">
+      Print delayed log
+    </button>
+    <script>
+      const button = document.querySelector("#classic-button");
+      const longAction = () => {
+        console.log(new Date());
+        const originalButtonText = button.textContent;
+        button.textContent = "Loading...";
+        button.setAttribute("disabled", "true");
+        button.classList.add("fading");
+        setTimeout(() => {
+          button.textContent = originalButtonText;
+          button.removeAttribute("disabled");
+          button.classList.remove("fading");
+          console.log("hello console", new Date());
+        }, 2000);
+      };
+    </script>
+  </body>
+</html>
