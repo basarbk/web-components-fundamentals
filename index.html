@@ -39,24 +39,56 @@
     </style>
   </head>
   <body>
-    <button id="classic-button" class="btn" onclick="longAction()">
-      Print delayed log
-    </button>
+    <app-button id="classic-button-login" onclick="login()" text="Login"></app-button>
+
+    <app-button id="classic-button-register" onclick="register()" text="Register"></button>
     <script>
-      const button = document.querySelector("#classic-button");
-      const longAction = () => {
-        console.log(new Date());
-        const originalButtonText = button.textContent;
-        button.textContent = "Loading...";
-        button.setAttribute("disabled", "true");
-        button.classList.add("fading");
+      const loginButton = document.querySelector("#classic-button-login");
+      const login = () => {
+        loginButton.setAttribute("inprogress", "true")
         setTimeout(() => {
-          button.textContent = originalButtonText;
-          button.removeAttribute("disabled");
-          button.classList.remove("fading");
-          console.log("hello console", new Date());
+          loginButton.removeAttribute("inprogress");
+          console.log("login response");
         }, 2000);
       };
+
+      const registerButton = document.querySelector("#classic-button-register");
+      const register = () => {
+        registerButton.setAttribute("inprogress", "true");
+        setTimeout(() => {
+          registerButton.removeAttribute("inprogress");
+          console.log("register response");
+        }, 2000);
+      };
+
+
+      class Button extends HTMLElement {
+        constructor(){
+          super();
+          const text = this.getAttribute("text");
+          this.innerHTML = `<button class="btn">${text}</button>`;
+        }
+        static get observedAttributes(){
+          return ["inprogress"]
+        }
+
+        attributeChangedCallback(attribute, oldValue, newValue){
+          const button = this.querySelector("button");
+          if(newValue){
+            button.textContent = "Loading...";
+            button.setAttribute("disabled", "true");
+            button.classList.add("fading");
+          } else {
+            button.textContent = this.getAttribute("text");
+            button.removeAttribute("disabled");
+            button.classList.remove("fading");
+          }
+        }
+
+      }
+
+      customElements.define("app-button", Button);
+
     </script>
   </body>
 </html>
