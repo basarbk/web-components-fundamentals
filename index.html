@@ -5,37 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Web Components</title>
     <style>
-      .btn {
-        background-color: #0070f3;
-        color: white;
-        border: none;
-        border-radius: 7px;
-        padding: 0 2rem;
-        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-        box-shadow: 0 4px 14px 0 rgba(0, 118, 255, 0.39);
-      }
-      .btn:hover {
-        background-color: #1d80f0;
-      }
-      .btn:disabled {
-        background-color: #6aa8f0;
-      }
-      .fading {
-        animation: fading 0.5s infinite;
-      }
-
-      @keyframes fading {
-        0% {
-          color: #6aa8f0;
-        }
-        50% {
-          color: white;
-        }
-        100% {
-          color: #6aa8f0;
-        }
-      }
 
       app-button[inprogress] {
         transform: scale(1.1);
@@ -69,84 +38,8 @@
         document.querySelector("app-counter").remove();
       };
 
-      class Button extends HTMLElement {
-        constructor() {
-          super();
-        }
-
-        connectedCallback() {
-          const text = this.getAttribute("text");
-          this.innerHTML = `<button class="btn">${text}</button>`;
-        }
-
-        set inprogress(progress) {
-          if (progress) {
-            this.setAttribute("inprogress", "true");
-          } else {
-            this.removeAttribute("inprogress");
-          }
-        }
-
-        get inprogress() {
-          return this.getAttribute("inprogress");
-        }
-
-        static get observedAttributes() {
-          return ["inprogress"];
-        }
-
-        attributeChangedCallback(attribute, oldValue, newValue) {
-          const button = this.querySelector("button");
-          if (newValue) {
-            button.textContent = "Loading...";
-            button.setAttribute("disabled", "true");
-            button.classList.add("fading");
-          } else {
-            button.textContent = this.getAttribute("text");
-            button.removeAttribute("disabled");
-            button.classList.remove("fading");
-          }
-        }
-      }
-
-      customElements.define("app-button", Button);
-
-      class Counter extends HTMLElement {
-        constructor() {
-          super();
-          console.log("constructor");
-          this.count = 0;
-        }
-
-        connectedCallback() {
-          console.log("connected");
-          this.innerHTML = this.count;
-          const until = this.getAttribute("until");
-          this.interval = setInterval(() => {
-            console.log("interval is running", Date.now());
-            if (this.count < until) {
-              this.count += 1;
-              this.innerHTML = this.count;
-            } else {
-              clearInterval(this.interval);
-            }
-          }, 1000);
-        }
-
-        disconnectedCallback() {
-          console.log("disconnected");
-          clearInterval(this.interval);
-        }
-
-        attributeChangedCallback(attribute, oldVal, newVal) {
-          console.log("attribute changed");
-        }
-
-        adoptedCallback() {
-          console.log("adopted");
-        }
-      }
-      customElements.define("app-counter", Counter);
     </script>
+    <script src="src/button.js"></script>
+    <script src="src/counter.js"></script>
   </body>
 </html>
