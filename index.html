@@ -36,38 +36,40 @@
           color: #6aa8f0;
         }
       }
+
+      app-button {
+        display: block;
+      }
+      app-counter {
+        display: block;
+      }
     </style>
   </head>
   <body>
-    <app-button id="classic-button-login" onclick="login()" text="Login"></app-button>
-
-    <app-button id="classic-button-register" onclick="register()" text="Register"></button>
+    <app-button text="Add" onclick="add()"></app-button>
+    <app-button text="Remove" onclick="remove()"></app-button>
     <script>
-      const loginButton = document.querySelector("#classic-button-login");
-      const login = () => {
-        loginButton.setAttribute("inprogress", "true")
-        setTimeout(() => {
-          loginButton.removeAttribute("inprogress");
-          console.log("login response");
-        }, 2000);
-      };
 
-      const registerButton = document.querySelector("#classic-button-register");
-      const register = () => {
-        registerButton.setAttribute("inprogress", "true");
-        setTimeout(() => {
-          registerButton.removeAttribute("inprogress");
-          console.log("register response");
-        }, 2000);
-      };
+      const add = () => {
+        const counter = document.createElement("app-counter");
+        counter.setAttribute("until", "5");
+        document.body.append(counter);
+      }
 
+      const remove = () => {
+        document.querySelector('app-counter').remove();
+      }
 
       class Button extends HTMLElement {
         constructor(){
           super();
+        }
+        
+        connectedCallback(){
           const text = this.getAttribute("text");
           this.innerHTML = `<button class="btn">${text}</button>`;
         }
+
         static get observedAttributes(){
           return ["inprogress"]
         }
@@ -88,6 +90,44 @@
       }
 
       customElements.define("app-button", Button);
+
+      class Counter extends HTMLElement {
+        constructor(){
+          super();
+          console.log("constructor");
+          this.count = 0;
+        }
+
+        connectedCallback(){
+          console.log("connected");
+          this.innerHTML = this.count;
+          const until = this.getAttribute("until");
+          this.interval = setInterval(() => {
+            console.log("interval is running", Date.now());
+            if(this.count < until){
+              this.count += 1;
+              this.innerHTML = this.count;
+            } else {
+              clearInterval(this.interval);
+            }
+
+          }, 1000);
+        }
+
+        disconnectedCallback(){
+          console.log("disconnected");
+          clearInterval(this.interval);
+        }
+
+        attributeChangedCallback(attribute, oldVal, newVal){
+          console.log("attribute changed");
+        }
+
+        adoptedCallback(){
+          console.log("adopted");
+        }
+      }
+      customElements.define("app-counter", Counter);
 
     </script>
   </body>
