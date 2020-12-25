@@ -37,7 +37,7 @@
         }
       }
 
-      app-button[inprogress] {
+      button[inprogress] {
         transform: scale(1.1);
         transform-origin: top left;
       }
@@ -51,11 +51,11 @@
     </style>
   </head>
   <body>
-    <app-button text="Add" onclick="add()"></app-button>
-    <app-button text="Remove" onclick="remove()"></app-button>
+    <button is="app-button" class="btn" text="Add" onclick="add()">Add</button>
+    <button is="app-button" class="btn" text="Remove" onclick="remove()">Remove</button>
     <script>
       const add = () => {
-        const addButton = document.querySelector("app-button");
+        const addButton = document.querySelector("button");
         addButton.inprogress = true;
         setTimeout(() => {
           const counter = document.createElement("app-counter");
@@ -69,14 +69,15 @@
         document.querySelector("app-counter").remove();
       };
 
-      class Button extends HTMLElement {
+      class Button extends HTMLButtonElement {
         constructor() {
           super();
         }
 
         connectedCallback() {
-          const text = this.getAttribute("text");
-          this.innerHTML = `<button class="btn">${text}</button>`;
+          this.text = this.textContent;
+          // const text = this.getAttribute("text");
+          // this.innerHTML = `<button class="btn">${text}</button>`;
         }
 
         set inprogress(progress) {
@@ -96,20 +97,20 @@
         }
 
         attributeChangedCallback(attribute, oldValue, newValue) {
-          const button = this.querySelector("button");
+          // const button = this.querySelector("button");
           if (newValue) {
-            button.textContent = "Loading...";
-            button.setAttribute("disabled", "true");
-            button.classList.add("fading");
+            this.textContent = "Loading...";
+            this.setAttribute("disabled", "true");
+            this.classList.add("fading");
           } else {
-            button.textContent = this.getAttribute("text");
-            button.removeAttribute("disabled");
-            button.classList.remove("fading");
+            this.textContent = this.text;
+            this.removeAttribute("disabled");
+            this.classList.remove("fading");
           }
         }
       }
 
-      customElements.define("app-button", Button);
+      customElements.define("app-button", Button, { extends: "button"});
 
       class Counter extends HTMLElement {
         constructor() {
