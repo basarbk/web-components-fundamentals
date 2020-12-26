@@ -1,19 +1,19 @@
 const cardTemplate = document.createElement("template");
 cardTemplate.innerHTML = /* html */ `
-<style>
-   div {
-     border: 1px solid black;
-   }
-</style>
-<div>
-<slot name="card-header">Card Header</slot>
-</div>
-<div>
-<slot name="card-body">Card Body</slot>
-</div>
-<div>
-  others will be added here
-  <slot></slot>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+  integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+  crossorigin="anonymous"
+/>
+
+<div class="card">
+  <div class="card-header">
+    <slot name="card-header">Card Header</slot>
+  </div>
+  <div class="card-body">
+    <slot name="card-body">Card Body</slot>
+  </div>
 </div>
 `;
 
