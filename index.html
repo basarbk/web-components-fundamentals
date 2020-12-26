@@ -25,11 +25,12 @@
       app-counter {
         display: block;
       }
+      :not(:defined){
+        display: none;
+      }
     </style>
   </head>
   <body>
-    <button type="button" class="btn btn-danger">Danger</button>
-
     <app-button onclick="add()">Add</app-button>
     <app-button onclick="remove()">Remove</app-button>
 
@@ -37,8 +38,6 @@
       <h1 slot="card-header">Header</h1>
       <h3 slot="card-header">sub header</h3>
       <p slot="card-body">this is the card body</p>
-      <button>no action</button>
-      <button>another action</button>
     </app-card>
 
     <app-stopwatch></app-stopwatch>

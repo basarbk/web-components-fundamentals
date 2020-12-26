@@ -9,6 +9,7 @@ cardTemplate.innerHTML = /* html */ `
 
 <div class="card">
   <div class="card-header">
+    Card header will be here
     <slot name="card-header">Card Header</slot>
   </div>
   <div class="card-body">
