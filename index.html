@@ -18,8 +18,14 @@
       app-counter {
         display: block;
       }
-      :not(:defined){
+      :not(:defined) {
         display: none;
+      }
+      h1 {
+        color: red;
+      }
+      h3 {
+        color: red;
       }
     </style>
   </head>
@@ -29,7 +35,9 @@
 
     <app-card>
       <h1 slot="card-header">Header</h1>
-      <h3 slot="card-header">sub header</h3>
+      <div slot="card-header">
+        <h3>sub header</h3>
+      </div>
       <p slot="card-body">this is the card body</p>
     </app-card>
 
