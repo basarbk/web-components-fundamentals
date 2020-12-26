@@ -39,13 +39,13 @@ buttonTemplate.innerHTML = /* html */ `
 class Button extends HTMLElement {
   constructor() {
     super();
-    this._root = this.attachShadow({mode: "closed"});
+    this.attachShadow({mode: "open"});
   }
 
   connectedCallback() {
     const text = this.getAttribute("text");
-    this._root.appendChild(buttonTemplate.content.cloneNode(true));
-    this.button = this._root.querySelector("button");
+    this.shadowRoot.appendChild(buttonTemplate.content.cloneNode(true));
+    this.button = this.shadowRoot.querySelector("button");
     this.button.textContent = text;
   }
 
