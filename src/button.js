@@ -33,7 +33,7 @@ buttonTemplate.innerHTML = /* html */ `
     }
   }
 </style>
-<button class="btn">Button Text</button>
+<button class="btn"><slot>Button Text</slot></button>
 `;
 
 class Button extends HTMLElement {
@@ -43,10 +43,9 @@ class Button extends HTMLElement {
   }
 
   connectedCallback() {
-    const text = this.getAttribute("text");
     this.shadowRoot.appendChild(buttonTemplate.content.cloneNode(true));
     this.button = this.shadowRoot.querySelector("button");
-    this.button.textContent = text;
+    this.initialValue = this.innerHTML;
   }
 
   set inprogress(progress) {
@@ -67,11 +66,11 @@ class Button extends HTMLElement {
 
   attributeChangedCallback(attribute, oldValue, newValue) {
     if (newValue) {
-      this.button.textContent = "Loading...";
+      this.innerHTML = "Loading...";
       this.button.setAttribute("disabled", "true");
       this.button.classList.add("fading");
     } else {
-      this.button.textContent = this.getAttribute("text");
+      this.innerHTML = this.initialValue;
       this.button.removeAttribute("disabled");
       this.button.classList.remove("fading");
     }
