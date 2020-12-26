@@ -1,6 +1,13 @@
 const buttonTemplate = document.createElement("template");
 buttonTemplate.innerHTML = /* html */ `
 <style>
+  :host {
+    display: block;
+  }
+  :host([inprogress]) {
+    transform: scale(1.1);
+    transform-origin: top left;
+  }
   .btn {
     background-color: #0070f3;
     color: white;
