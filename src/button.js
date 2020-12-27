@@ -46,13 +46,22 @@ buttonTemplate.innerHTML = /* html */ `
 class Button extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({mode: "open"});
+    this.attachShadow({ mode: "open" });
   }
 
   connectedCallback() {
     this.shadowRoot.appendChild(buttonTemplate.content.cloneNode(true));
     this.button = this.shadowRoot.querySelector("button");
     this.initialValue = this.innerHTML;
+    this.button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      this.button.dispatchEvent(
+        new CustomEvent("click-app-button", {
+          bubbles: true,
+          composed: true,
+        })
+      );
+    });
   }
 
   set inprogress(progress) {

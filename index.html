@@ -28,12 +28,10 @@
     </style>
   </head>
   <body>
-    <app-input label="Username"></app-input>
-    <input />
     <app-form></app-form>
     <script>
-      document.addEventListener("input", (event) => {
-        console.log("input event: ", event.target.tagName);
+      document.addEventListener("click-app-button", (event) => {
+        console.log("clicked the button");
       });
 
       document.addEventListener("app-input", (event) => {
