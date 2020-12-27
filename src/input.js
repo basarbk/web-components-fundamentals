@@ -25,6 +25,17 @@ class Input extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
     const label = this.shadowRoot.querySelector("label");
     label.textContent = this.getAttribute("label");
+    const input = this.shadowRoot.querySelector("input");
+    input.addEventListener("input", (event) => {
+      event.stopPropagation();
+      input.dispatchEvent(
+        new CustomEvent("app-input", {
+          bubbles: true,
+          composed: true,
+          detail: event.target.value,
+        })
+      );
+    });
   }
 }
 

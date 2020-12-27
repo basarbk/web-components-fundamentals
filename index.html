@@ -21,21 +21,29 @@
       body {
         padding: 10px;
       }
-      
+
       :not(:defined) {
         display: none;
       }
-
     </style>
   </head>
   <body>
     <app-input label="Username"></app-input>
+    <input />
+    <app-form></app-form>
     <script>
-      
+      document.addEventListener("input", (event) => {
+        console.log("input event: ", event.target.tagName);
+      });
+
+      document.addEventListener("app-input", (event) => {
+        console.log("app input event: ", event.target.tagName, event.detail);
+      });
     </script>
     <script src="src/button.js" type="module"></script>
     <script src="src/counter.js" type="module"></script>
     <script src="src/card.js" type="module"></script>
     <script src="src/input.js" type="module"></script>
+    <script src="src/basic-form.js" type="module"></script>
   </body>
 </html>
