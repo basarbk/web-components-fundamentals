@@ -11,11 +11,6 @@
       crossorigin="anonymous"
     />
     <style>
-      /* :root{
-        --element-bg-color: rgb(189, 61, 11);
-        --line-color: rgb(42, 53, 32);
-      } */
-
       .dark {
         --element-bg-color: rgb(34, 34, 70);
         --line-color: rgb(66, 66, 117);
@@ -26,50 +21,21 @@
       body {
         padding: 10px;
       }
-
-      app-counter {
-        display: block;
-      }
+      
       :not(:defined) {
         display: none;
       }
 
     </style>
   </head>
-  <body class="dark">
-
-    <app-card>
-      <h1 slot="card-header">Header</h1>
-      <p slot="card-body">this is the card body</p>
-      <app-button slot="card-body" onclick="switchTheme()">Switch Theme</app-button>
-    </app-card>
-
+  <body>
+    <app-input label="Username"></app-input>
     <script>
-      const add = () => {
-        const addButton = document.querySelector("app-button");
-        addButton.inprogress = true;
-        setTimeout(() => {
-          const counter = document.createElement("app-counter");
-          counter.setAttribute("until", "5");
-          document.body.append(counter);
-          addButton.inprogress = false;
-        }, 2000);
-      };
-
-      const remove = () => {
-        document.querySelector("app-counter").remove();
-      };
-
-      const switchTheme = () => {
-        if(document.body.classList.contains('dark')){
-          document.body.classList.remove('dark');
-        } else {
-          document.body.classList.add('dark');
-        }
-      }
+      
     </script>
     <script src="src/button.js" type="module"></script>
     <script src="src/counter.js" type="module"></script>
     <script src="src/card.js" type="module"></script>
+    <script src="src/input.js" type="module"></script>
   </body>
 </html>
