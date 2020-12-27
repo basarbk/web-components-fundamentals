@@ -1,22 +1,28 @@
 const cardTemplate = document.createElement("template");
 cardTemplate.innerHTML = /* html */ `
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-  integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
-  crossorigin="anonymous"
-/>
 <style>
-  ::slotted(*){
-    color: black !important;
+  .card {
+    border-radius: 5px;
+    border: 1px solid var(--line-color, darkgray);
   }
+  .card-header {
+    padding: 5px;
+    background-color: var(--element-bg-color, lightgray);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 1px solid var(--line-color, darkgray);
+  }
+
+  .card-body{
+    padding: 5px;
+  }
+  
 </style>
 <div class="card">
   <div class="card-header">
-    Card header will be here
     <slot name="card-header">Card Header</slot>
   </div>
-  <div part="body-of-card" class="card-body">
+  <div class="card-body">
     <slot name="card-body">Card Body</slot>
   </div>
 </div>

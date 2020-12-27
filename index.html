@@ -11,6 +11,18 @@
       crossorigin="anonymous"
     />
     <style>
+      /* :root{
+        --element-bg-color: rgb(189, 61, 11);
+        --line-color: rgb(42, 53, 32);
+      } */
+
+      .dark {
+        --element-bg-color: rgb(34, 34, 70);
+        --line-color: rgb(66, 66, 117);
+        background-color: rgb(27, 27, 39);
+        color: lightgray;
+      }
+
       body {
         padding: 10px;
       }
@@ -21,33 +33,17 @@
       :not(:defined) {
         display: none;
       }
-      h1 {
-        color: red;
-      }
-      h3 {
-        color: red;
-      }
-
-      app-card::part(body-of-card){
-        padding: 4rem;
-        background-color: lightgray;
-      }
 
     </style>
   </head>
-  <body>
-    <app-button onclick="add()">Add</app-button>
-    <app-button onclick="remove()">Remove</app-button>
+  <body class="dark">
 
     <app-card>
       <h1 slot="card-header">Header</h1>
-      <div slot="card-header">
-        <h3>sub header</h3>
-      </div>
       <p slot="card-body">this is the card body</p>
+      <app-button slot="card-body" onclick="switchTheme()">Switch Theme</app-button>
     </app-card>
 
-    <app-stopwatch></app-stopwatch>
     <script>
       const add = () => {
         const addButton = document.querySelector("app-button");
@@ -63,6 +59,14 @@
       const remove = () => {
         document.querySelector("app-counter").remove();
       };
+
+      const switchTheme = () => {
+        if(document.body.classList.contains('dark')){
+          document.body.classList.remove('dark');
+        } else {
+          document.body.classList.add('dark');
+        }
+      }
     </script>
     <script src="src/button.js" type="module"></script>
     <script src="src/counter.js" type="module"></script>
