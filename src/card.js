@@ -16,7 +16,7 @@ cardTemplate.innerHTML = /* html */ `
     Card header will be here
     <slot name="card-header">Card Header</slot>
   </div>
-  <div class="card-body">
+  <div part="body-of-card" class="card-body">
     <slot name="card-body">Card Body</slot>
   </div>
 </div>
