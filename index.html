@@ -28,15 +28,16 @@
     </style>
   </head>
   <body>
-    <app-form></app-form>
+    <app-input label="Username" help="This cannot be null" validation="none"></app-input>
+    <!-- <app-form></app-form> -->
     <script>
-      document.addEventListener("click-app-button", (event) => {
-        console.log("clicked the button");
-      });
+      // document.addEventListener("click-app-button", (event) => {
+      //   console.log("clicked the button");
+      // });
 
-      document.addEventListener("app-input", (event) => {
-        console.log("app input event: ", event.target.tagName, event.detail);
-      });
+      // document.addEventListener("app-input", (event) => {
+      //   console.log("app input event: ", event.target.tagName, event.detail);
+      // });
     </script>
     <script src="src/button.js" type="module"></script>
     <script src="src/counter.js" type="module"></script>
