@@ -67,6 +67,7 @@ class Input extends HTMLElement {
     this.span.textContent = this.getAttribute("help");
 
     const input = this.shadowRoot.querySelector("input");
+    input.type = this.getAttribute("type");
     input.addEventListener("input", (event) => {
       event.stopPropagation();
       input.dispatchEvent(
@@ -78,6 +79,16 @@ class Input extends HTMLElement {
       );
     });
   }
+
+
+  static get observedAttributes() {
+    return ["help"];
+  }
+
+  attributeChangedCallback(attribute, oldValue, newValue) {
+    this.span.textContent = newValue;
+  }
+
 }
 
 customElements.define("app-input", Input);

@@ -13,7 +13,9 @@ buttonTemplate.innerHTML = /* html */ `
     color: white;
     border: none;
     border-radius: 7px;
+    margin-top: 5px;
     padding: 0 2rem;
+    font-size: 1.5rem;
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
       "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
     box-shadow: 0 4px 14px 0 rgba(0, 118, 255, 0.39);
